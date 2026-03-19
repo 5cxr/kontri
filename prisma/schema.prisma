@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String         @unique
+  password      String
+  createdAt     DateTime       @default(now())
+  hostedRooms   Room[]         @relation("HostRooms")
+  contributions Contribution[]
+}
+
+model Room {
+  id              String         @id @default(cuid())
+  title           String
+  description     String?
+  targetAmount    Float
+  collectedAmount Float          @default(0)
+  deadline        DateTime
+  status          String         @default("active")
+  inviteCode      String         @unique
+  hostId          String
+  host            User           @relation("HostRooms", fields: [hostId], references: [id])
+  contributions   Contribution[]
+  createdAt       DateTime       @default(now())
+}
+
+model Contribution {
+  id        String   @id @default(cuid())
+  roomId    String
+  userId    String
+  amount    Float
+  status    String   @default("pending")
+  note      String?
+  room      Room     @relation(fields: [roomId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}

@@ -4,7 +4,15 @@
       "Bash(npx create-next-app@latest . --typescript --tailwind --app --src-dir --no-import-alias --eslint --yes)",
       "Bash(mv /Users/s4r7h4k/Desktop/vibes/awst/group_gift_fundraiser_plan.md /tmp/group_gift_fundraiser_plan.md)",
       "Bash(npx create-next-app@latest /Users/s4r7h4k/Desktop/vibes/awst --typescript --tailwind --app --src-dir --no-import-alias --eslint --yes)",
-      "Bash(mv /tmp/group_gift_fundraiser_plan.md /Users/s4r7h4k/Desktop/vibes/awst/group_gift_fundraiser_plan.md)"
+      "Bash(mv /tmp/group_gift_fundraiser_plan.md /Users/s4r7h4k/Desktop/vibes/awst/group_gift_fundraiser_plan.md)",
+      "Bash(npm install:*)",
+      "Bash(npm show:*)",
+      "Bash(node -e \"const v=JSON.parse\\(require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\)\\); console.log\\(v.filter\\(x=>x.startsWith\\(''''6.''''\\)\\).slice\\(-5\\).join\\(''''\\\\n''''\\)\\)\")",
+      "Bash(node -e \"const v=JSON.parse\\(require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\)\\); const stable=v.filter\\(x=>/^6\\\\.\\\\d+\\\\.\\\\d+$/.test\\(x\\)\\); console.log\\(stable.slice\\(-3\\).join\\(''''\\\\n''''\\)\\)\")",
+      "Bash(npx prisma:*)",
+      "Bash(openssl rand:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
