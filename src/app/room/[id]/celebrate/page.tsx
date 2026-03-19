@@ -5,6 +5,7 @@ import { useFetch } from "@/lib/useFetch";
 import confetti from "canvas-confetti";
 import Link from "next/link";
 import { Gift, Star } from "lucide-react";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 interface Room {
   id: string;
@@ -35,7 +36,7 @@ export default function CelebratePage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-amber-50 flex items-center justify-center">
+      <main className="min-h-screen bg-amber-50 dark:bg-zinc-900 flex items-center justify-center">
         <p className="text-amber-600 font-bold text-xl animate-pulse">Loading celebration...</p>
       </main>
     );
@@ -49,7 +50,11 @@ export default function CelebratePage() {
   const confirmed = room.contributions.filter((c) => c.status === "confirmed");
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100 flex flex-col items-center justify-center px-6 py-12">
+    <main className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100 dark:from-zinc-900 dark:to-zinc-800 flex flex-col items-center justify-center px-6 py-12">
+      <div className="absolute top-4 right-4">
+        <DarkModeToggle />
+      </div>
+
       {/* Header */}
       <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl text-amber-600 mb-10">
         <Gift className="w-6 h-6" />
@@ -57,34 +62,34 @@ export default function CelebratePage() {
       </Link>
 
       {/* Celebration card */}
-      <div className="bg-white rounded-3xl shadow-xl p-10 max-w-md w-full text-center flex flex-col items-center gap-4">
+      <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-xl p-10 max-w-md w-full text-center flex flex-col items-center gap-4 border border-gray-100 dark:border-zinc-700">
         <div className="text-6xl">🎉</div>
-        <h1 className="text-3xl font-extrabold text-gray-900">Goal reached!</h1>
+        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-50">Goal reached!</h1>
         <p className="text-amber-600 font-semibold text-lg">{room.title}</p>
-        {room.description && <p className="text-gray-400 text-sm">{room.description}</p>}
+        {room.description && <p className="text-gray-400 dark:text-gray-500 text-sm">{room.description}</p>}
 
         {/* Full progress bar */}
-        <div className="w-full bg-amber-100 rounded-full h-5 mt-2">
+        <div className="w-full bg-amber-100 dark:bg-amber-900/30 rounded-full h-5 mt-2">
           <div className="bg-amber-500 h-5 rounded-full w-full" />
         </div>
-        <p className="font-bold text-gray-800">
+        <p className="font-bold text-gray-800 dark:text-gray-100">
           ₹{room.collectedAmount.toLocaleString()} raised of ₹{room.targetAmount.toLocaleString()}
         </p>
 
         {/* Contributors */}
         <div className="w-full text-left mt-2">
-          <p className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-1">
+          <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1">
             <Star className="w-4 h-4 text-amber-400" />
             Contributors
           </p>
           {confirmed.length === 0 ? (
-            <p className="text-gray-400 text-sm">No confirmed contributors yet.</p>
+            <p className="text-gray-400 dark:text-gray-500 text-sm">No confirmed contributors yet.</p>
           ) : (
             <ul className="flex flex-col gap-2">
               {confirmed.map((c) => (
-                <li key={c.id} className="flex items-center justify-between bg-amber-50 rounded-xl px-4 py-2">
-                  <span className="text-sm font-medium text-gray-800">{c.user.name}</span>
-                  <span className="text-sm text-amber-600 font-bold">₹{c.amount.toLocaleString()}</span>
+                <li key={c.id} className="flex items-center justify-between bg-amber-50 dark:bg-amber-900/20 rounded-xl px-4 py-2">
+                  <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{c.user.name}</span>
+                  <span className="text-sm text-amber-600 dark:text-amber-400 font-bold">₹{c.amount.toLocaleString()}</span>
                 </li>
               ))}
             </ul>

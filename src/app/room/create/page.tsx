@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Gift, ArrowLeft } from "lucide-react";
 import toast from "react-hot-toast";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 export default function CreateRoomPage() {
   const router = useRouter();
@@ -33,46 +34,47 @@ export default function CreateRoomPage() {
   }
 
   return (
-    <main className="min-h-screen bg-amber-50">
-      <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm">
+    <main className="min-h-screen bg-amber-50 dark:bg-zinc-900">
+      <nav className="flex items-center justify-between px-8 py-4 bg-white dark:bg-zinc-900 border-b border-amber-100 dark:border-zinc-800 shadow-sm">
         <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl text-amber-600">
           <Gift className="w-6 h-6" />
           GiftPool
         </Link>
+        <DarkModeToggle />
       </nav>
 
       <div className="max-w-lg mx-auto px-6 py-10">
-        <Link href="/dashboard" className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 mb-6">
+        <Link href="/dashboard" className="flex items-center gap-1 text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 mb-6">
           <ArrowLeft className="w-4 h-4" />
           Back to dashboard
         </Link>
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-1">Start a gift mission</h1>
-        <p className="text-gray-400 text-sm mb-8">Fill in the details and share the link with your group.</p>
+        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-50 mb-1">Start a gift mission</h1>
+        <p className="text-gray-400 dark:text-gray-500 text-sm mb-8">Fill in the details and share the link with your group.</p>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow p-6 flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 flex flex-col gap-4 border border-gray-100 dark:border-zinc-700">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Gift title</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Gift title</label>
             <input
               type="text"
               placeholder="e.g. Rohan's Birthday Gift"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Description (optional)</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Description (optional)</label>
             <textarea
               placeholder="What's the gift? Any message for the group?"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300 resize-none"
+              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300 resize-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Target amount (₹)</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Target amount (₹)</label>
             <input
               type="number"
               placeholder="e.g. 5000"
@@ -80,17 +82,17 @@ export default function CreateRoomPage() {
               onChange={(e) => setTargetAmount(e.target.value)}
               required
               min={1}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Deadline</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Deadline</label>
             <input
               type="date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
               required
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
             />
           </div>
           <button

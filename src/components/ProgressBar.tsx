@@ -13,15 +13,15 @@ export default function ProgressBar({ collected, target, progress }: ProgressBar
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <span className="font-bold text-gray-800 text-lg">
+        <span className="font-bold text-gray-800 dark:text-gray-100 text-lg">
           ₹{collected.toLocaleString()}
-          <span className="text-gray-400 font-normal text-sm"> raised</span>
+          <span className="text-gray-400 dark:text-gray-500 font-normal text-sm"> raised</span>
         </span>
-        <span className="text-amber-600 font-bold text-lg">{Math.round(progress)}%</span>
+        <span className="text-amber-600 dark:text-amber-400 font-bold text-lg">{Math.round(progress)}%</span>
       </div>
 
       {/* Bar */}
-      <div className="relative w-full bg-amber-100 rounded-full h-6 overflow-hidden">
+      <div className="relative w-full bg-amber-100 dark:bg-amber-900/30 rounded-full h-6 overflow-hidden">
         <motion.div
           className="h-6 rounded-full bg-gradient-to-r from-amber-400 to-amber-500"
           initial={{ width: 0 }}
@@ -32,13 +32,13 @@ export default function ProgressBar({ collected, target, progress }: ProgressBar
         {milestones.map((m) => (
           <div
             key={m}
-            className="absolute top-0 bottom-0 w-0.5 bg-white/60"
+            className="absolute top-0 bottom-0 w-0.5 bg-white/60 dark:bg-zinc-900/40"
             style={{ left: `${m}%` }}
           />
         ))}
       </div>
 
-      <div className="flex items-center justify-between text-sm text-gray-400">
+      <div className="flex items-center justify-between text-sm text-gray-400 dark:text-gray-500">
         <span>Goal: ₹{target.toLocaleString()}</span>
         <span>
           {target - collected > 0
@@ -55,7 +55,7 @@ export default function ProgressBar({ collected, target, progress }: ProgressBar
             className={`text-xs px-2 py-1 rounded-full font-semibold ${
               progress >= m
                 ? "bg-amber-500 text-white"
-                : "bg-amber-100 text-amber-400"
+                : "bg-amber-100 dark:bg-amber-900/30 text-amber-400 dark:text-amber-600"
             }`}
           >
             {m}%

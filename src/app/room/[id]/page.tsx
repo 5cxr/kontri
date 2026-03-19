@@ -6,6 +6,8 @@ import { Gift } from "lucide-react";
 import ProgressBar from "@/components/ProgressBar";
 import CountdownTimer from "@/components/CountdownTimer";
 import ContributionList from "@/components/ContributionList";
+import CopyInviteButton from "@/components/CopyInviteButton";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 export default async function RoomPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -31,39 +33,37 @@ export default async function RoomPage({ params }: { params: Promise<{ id: strin
   const inviteUrl = `${process.env.NEXTAUTH_URL}/room/${id}`;
 
   return (
-    <main className="min-h-screen bg-amber-50">
-      <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm">
+    <main className="min-h-screen bg-amber-50 dark:bg-zinc-900">
+      <nav className="flex items-center justify-between px-8 py-4 bg-white dark:bg-zinc-900 border-b border-amber-100 dark:border-zinc-800 shadow-sm">
         <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl text-amber-600">
           <Gift className="w-6 h-6" />
           GiftPool
         </Link>
-        <span className="text-xs bg-amber-100 text-amber-700 font-semibold px-3 py-1 rounded-full">
-          {room.status === "active" ? "Gift mission in progress" : "Expired"}
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-semibold px-3 py-1 rounded-full">
+            {room.status === "active" ? "Gift mission in progress" : "Expired"}
+          </span>
+          <DarkModeToggle />
+        </div>
       </nav>
 
       <div className="max-w-2xl mx-auto px-6 py-10 flex flex-col gap-6">
         {/* Room header */}
-        <div className="bg-white rounded-2xl shadow p-6">
-          <h1 className="text-2xl font-extrabold text-gray-900">{room.title}</h1>
-          {room.description && <p className="text-gray-500 text-sm mt-1">{room.description}</p>}
-          <p className="text-xs text-gray-400 mt-2">Hosted by {room.host.name}</p>
+        <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 border border-gray-100 dark:border-zinc-700">
+          <h1 className="text-2xl font-extrabold text-gray-900 dark:text-gray-50">{room.title}</h1>
+          {room.description && <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{room.description}</p>}
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">Hosted by {room.host.name}</p>
 
           {/* Invite code */}
-          <div className="mt-4 flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
-            <span className="text-xs text-gray-500">Invite link:</span>
-            <span className="text-sm font-mono text-amber-700 truncate flex-1">{inviteUrl}</span>
-            <button
-              onClick={() => navigator.clipboard.writeText(inviteUrl)}
-              className="text-xs bg-amber-500 text-white px-3 py-1 rounded-lg hover:bg-amber-600 transition"
-            >
-              Copy
-            </button>
+          <div className="mt-4 flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl px-4 py-3">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Invite link:</span>
+            <span className="text-sm font-mono text-amber-700 dark:text-amber-400 truncate flex-1">{inviteUrl}</span>
+            <CopyInviteButton url={inviteUrl} />
           </div>
         </div>
 
         {/* Progress */}
-        <div className="bg-white rounded-2xl shadow p-6">
+        <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 border border-gray-100 dark:border-zinc-700">
           <ProgressBar
             collected={room.collectedAmount}
             target={room.targetAmount}
@@ -72,7 +72,7 @@ export default async function RoomPage({ params }: { params: Promise<{ id: strin
         </div>
 
         {/* Countdown */}
-        <div className="bg-white rounded-2xl shadow p-4">
+        <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-4 border border-gray-100 dark:border-zinc-700">
           <CountdownTimer deadline={room.deadline.toISOString()} />
         </div>
 

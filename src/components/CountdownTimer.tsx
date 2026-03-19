@@ -15,7 +15,7 @@ function getStatus(deadline: string) {
   if (diffMs <= 0) return { label: "Overdue", color: "text-red-500", urgent: true };
   if (diffDays === 1) return { label: "Due today!", color: "text-red-500", urgent: true };
   if (diffDays <= 3) return { label: `${diffDays} days left`, color: "text-orange-500", urgent: true };
-  return { label: `${diffDays} days left`, color: "text-amber-600", urgent: false };
+  return { label: `${diffDays} days left`, color: "text-amber-600 dark:text-amber-400", urgent: false };
 }
 
 export default function CountdownTimer({ deadline }: CountdownTimerProps) {
@@ -30,13 +30,13 @@ export default function CountdownTimer({ deadline }: CountdownTimerProps) {
     <div className="flex items-center gap-3">
       <Clock className={`w-5 h-5 ${status.color}`} />
       <div>
-        <p className="text-xs text-gray-400 font-medium">Deadline</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500 font-medium">Deadline</p>
         <p className={`font-bold text-sm ${status.color}`}>
           {status.label}
           {status.urgent && " ⏰"}
         </p>
       </div>
-      <div className="ml-auto text-xs text-gray-400">
+      <div className="ml-auto text-xs text-gray-400 dark:text-gray-500">
         {new Date(deadline).toLocaleDateString("en-IN", {
           day: "numeric",
           month: "short",
