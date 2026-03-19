@@ -15,7 +15,7 @@ function getStatus(deadline: string) {
   if (diffMs <= 0) return { label: "Overdue", color: "text-red-500", urgent: true };
   if (diffDays === 1) return { label: "Due today!", color: "text-red-500", urgent: true };
   if (diffDays <= 3) return { label: `${diffDays} days left`, color: "text-orange-500", urgent: true };
-  return { label: `${diffDays} days left`, color: "text-amber-600 dark:text-amber-400", urgent: false };
+  return { label: `${diffDays} days left`, color: "text-green-600 dark:text-green-400", urgent: false };
 }
 
 export default function CountdownTimer({ deadline }: CountdownTimerProps) {

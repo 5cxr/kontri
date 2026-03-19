@@ -33,15 +33,17 @@ export default async function RoomPage({ params }: { params: Promise<{ id: strin
   const inviteUrl = `${process.env.NEXTAUTH_URL}/room/${id}`;
 
   return (
-    <main className="min-h-screen bg-amber-50 dark:bg-zinc-900">
-      <nav className="flex items-center justify-between px-8 py-4 bg-white dark:bg-zinc-900 border-b border-amber-100 dark:border-zinc-800 shadow-sm">
-        <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl text-amber-600">
-          <Gift className="w-6 h-6" />
-          GiftPool
+    <main className="min-h-screen doodle-bg">
+      <nav className="flex items-center justify-between px-8 py-4 bg-blue-900/80 dark:bg-slate-950/80 backdrop-blur-sm border-b border-white/10">
+        <Link href="/dashboard" className="flex items-center gap-2 font-black text-xl">
+          <Gift className="w-6 h-6 text-green-400" />
+          <span className="bg-gradient-to-r from-green-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent">
+            Kontri
+          </span>
         </Link>
         <div className="flex items-center gap-3">
-          <span className="text-xs bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-semibold px-3 py-1 rounded-full">
-            {room.status === "active" ? "Gift mission in progress" : "Expired"}
+          <span className={`text-xs font-semibold px-3 py-1 rounded-full ${room.status === "active" ? "bg-green-500/20 text-green-300 border border-green-500/30" : "bg-red-500/20 text-red-300 border border-red-500/30"}`}>
+            {room.status === "active" ? "Mission in progress 🎯" : "Expired"}
           </span>
           <DarkModeToggle />
         </div>
@@ -49,30 +51,26 @@ export default async function RoomPage({ params }: { params: Promise<{ id: strin
 
       <div className="max-w-2xl mx-auto px-6 py-10 flex flex-col gap-6">
         {/* Room header */}
-        <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 border border-gray-100 dark:border-zinc-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-white/10">
           <h1 className="text-2xl font-extrabold text-gray-900 dark:text-gray-50">{room.title}</h1>
           {room.description && <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{room.description}</p>}
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">Hosted by {room.host.name}</p>
 
-          {/* Invite code */}
-          <div className="mt-4 flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl px-4 py-3">
+          {/* Invite link */}
+          <div className="mt-4 flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl px-4 py-3">
             <span className="text-xs text-gray-500 dark:text-gray-400">Invite link:</span>
-            <span className="text-sm font-mono text-amber-700 dark:text-amber-400 truncate flex-1">{inviteUrl}</span>
+            <span className="text-sm font-mono text-blue-700 dark:text-blue-400 truncate flex-1">{inviteUrl}</span>
             <CopyInviteButton url={inviteUrl} />
           </div>
         </div>
 
         {/* Progress */}
-        <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 border border-gray-100 dark:border-zinc-700">
-          <ProgressBar
-            collected={room.collectedAmount}
-            target={room.targetAmount}
-            progress={progress}
-          />
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-white/10">
+          <ProgressBar collected={room.collectedAmount} target={room.targetAmount} progress={progress} />
         </div>
 
         {/* Countdown */}
-        <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-4 border border-gray-100 dark:border-zinc-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-4 border border-white/10">
           <CountdownTimer deadline={room.deadline.toISOString()} />
         </div>
 

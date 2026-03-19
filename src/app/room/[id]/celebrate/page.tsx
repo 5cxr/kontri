@@ -25,10 +25,10 @@ export default function CelebratePage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ["#f59e0b", "#fcd34d", "#fde68a", "#ef4444", "#10b981"],
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.5 },
+        colors: ["#22c55e", "#facc15", "#f97316", "#ec4899", "#8b5cf6", "#38bdf8"],
       });
     }, 200);
     return () => clearTimeout(timer);
@@ -36,8 +36,8 @@ export default function CelebratePage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-amber-50 dark:bg-zinc-900 flex items-center justify-center">
-        <p className="text-amber-600 font-bold text-xl animate-pulse">Loading celebration...</p>
+      <main className="min-h-screen doodle-bg flex items-center justify-center">
+        <p className="text-white font-bold text-xl animate-pulse">Loading celebration...</p>
       </main>
     );
   }
@@ -50,27 +50,29 @@ export default function CelebratePage() {
   const confirmed = room.contributions.filter((c) => c.status === "confirmed");
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100 dark:from-zinc-900 dark:to-zinc-800 flex flex-col items-center justify-center px-6 py-12">
+    <main className="min-h-screen doodle-bg flex flex-col items-center justify-center px-6 py-12">
       <div className="absolute top-4 right-4">
         <DarkModeToggle />
       </div>
 
       {/* Header */}
-      <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl text-amber-600 mb-10">
-        <Gift className="w-6 h-6" />
-        GiftPool
+      <Link href="/dashboard" className="flex items-center gap-2 font-black text-xl mb-10">
+        <Gift className="w-6 h-6 text-green-400" />
+        <span className="bg-gradient-to-r from-green-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent">
+          Kontri
+        </span>
       </Link>
 
       {/* Celebration card */}
-      <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-xl p-10 max-w-md w-full text-center flex flex-col items-center gap-4 border border-gray-100 dark:border-zinc-700">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-10 max-w-md w-full text-center flex flex-col items-center gap-4 border border-white/10">
         <div className="text-6xl">🎉</div>
         <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-50">Goal reached!</h1>
-        <p className="text-amber-600 font-semibold text-lg">{room.title}</p>
+        <p className="text-green-600 dark:text-green-400 font-semibold text-lg">{room.title}</p>
         {room.description && <p className="text-gray-400 dark:text-gray-500 text-sm">{room.description}</p>}
 
         {/* Full progress bar */}
-        <div className="w-full bg-amber-100 dark:bg-amber-900/30 rounded-full h-5 mt-2">
-          <div className="bg-amber-500 h-5 rounded-full w-full" />
+        <div className="w-full bg-green-100 dark:bg-green-900/30 rounded-full h-5 mt-2">
+          <div className="bg-green-500 h-5 rounded-full w-full" />
         </div>
         <p className="font-bold text-gray-800 dark:text-gray-100">
           ₹{room.collectedAmount.toLocaleString()} raised of ₹{room.targetAmount.toLocaleString()}
@@ -79,7 +81,7 @@ export default function CelebratePage() {
         {/* Contributors */}
         <div className="w-full text-left mt-2">
           <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1">
-            <Star className="w-4 h-4 text-amber-400" />
+            <Star className="w-4 h-4 text-yellow-400" />
             Contributors
           </p>
           {confirmed.length === 0 ? (
@@ -87,16 +89,16 @@ export default function CelebratePage() {
           ) : (
             <ul className="flex flex-col gap-2">
               {confirmed.map((c) => (
-                <li key={c.id} className="flex items-center justify-between bg-amber-50 dark:bg-amber-900/20 rounded-xl px-4 py-2">
+                <li key={c.id} className="flex items-center justify-between bg-green-50 dark:bg-green-900/20 rounded-xl px-4 py-2">
                   <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{c.user.name}</span>
-                  <span className="text-sm text-amber-600 dark:text-amber-400 font-bold">₹{c.amount.toLocaleString()}</span>
+                  <span className="text-sm text-green-600 dark:text-green-400 font-bold">₹{c.amount.toLocaleString()}</span>
                 </li>
               ))}
             </ul>
           )}
         </div>
 
-        <Link href="/dashboard" className="mt-4 px-6 py-3 bg-amber-500 text-white rounded-full font-bold hover:bg-amber-600 transition">
+        <Link href="/dashboard" className="mt-4 px-6 py-3 bg-green-500 text-white rounded-full font-bold hover:bg-green-400 transition shadow-lg shadow-green-500/30">
           Back to dashboard
         </Link>
       </div>

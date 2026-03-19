@@ -60,12 +60,12 @@ export default function ContributionList({ contributions, roomId, isHost, curren
   }
 
   return (
-    <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 flex flex-col gap-4 border border-gray-100 dark:border-zinc-700">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 flex flex-col gap-4 border border-white/10">
       <h2 className="font-bold text-gray-900 dark:text-gray-100 text-lg">Contributions</h2>
 
       {/* Add contribution form */}
       {!hasContributed && !isHost && (
-        <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 flex flex-col gap-3 border border-amber-100 dark:border-amber-800">
+        <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 flex flex-col gap-3 border border-green-200 dark:border-green-800">
           <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">Mark your contribution</p>
           <div className="flex gap-2">
             <input
@@ -73,20 +73,20 @@ export default function ContributionList({ contributions, roomId, isHost, curren
               placeholder="Amount (₹)"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="flex-1 border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="flex-1 border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
             />
             <input
               type="text"
               placeholder="Note (optional)"
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="flex-1 border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="flex-1 border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
             />
           </div>
           <button
             onClick={submitContribution}
             disabled={loading || !amount}
-            className="flex items-center justify-center gap-2 bg-amber-500 text-white rounded-xl py-2 font-bold hover:bg-amber-600 transition disabled:opacity-60 text-sm"
+            className="flex items-center justify-center gap-2 bg-green-500 text-white rounded-xl py-2 font-bold hover:bg-green-400 transition disabled:opacity-60 text-sm shadow shadow-green-500/30"
           >
             <Plus className="w-4 h-4" />
             {loading ? "Submitting..." : "I've paid"}
@@ -102,17 +102,17 @@ export default function ContributionList({ contributions, roomId, isHost, curren
       ) : (
         <ul className="flex flex-col gap-2">
           {contributions.map((c) => (
-            <li key={c.id} className="flex items-center justify-between bg-gray-50 dark:bg-zinc-700/50 rounded-xl px-4 py-3">
+            <li key={c.id} className="flex items-center justify-between bg-gray-50 dark:bg-slate-700/50 rounded-xl px-4 py-3">
               <div>
                 <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">{c.user.name}</p>
                 {c.note && <p className="text-xs text-gray-400 dark:text-gray-500">{c.note}</p>}
               </div>
               <div className="flex items-center gap-3">
-                <span className="font-bold text-amber-600 dark:text-amber-400">₹{c.amount.toLocaleString()}</span>
+                <span className="font-bold text-green-600 dark:text-green-400">₹{c.amount.toLocaleString()}</span>
                 {c.status === "confirmed" ? (
                   <CheckCircle className="w-5 h-5 text-green-500" />
                 ) : (
-                  <span className="flex items-center gap-1 text-xs text-orange-400">
+                  <span className="flex items-center gap-1 text-xs text-yellow-500 dark:text-yellow-400">
                     <Clock className="w-4 h-4" />
                     Pending
                   </span>
@@ -121,7 +121,7 @@ export default function ContributionList({ contributions, roomId, isHost, curren
                   <button
                     onClick={() => confirmContribution(c.id)}
                     disabled={confirming === c.id}
-                    className="text-xs bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition disabled:opacity-60"
+                    className="text-xs bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-400 transition disabled:opacity-60"
                   >
                     {confirming === c.id ? "..." : "Confirm"}
                   </button>

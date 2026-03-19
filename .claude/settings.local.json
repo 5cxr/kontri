@@ -12,7 +12,12 @@
       "Bash(npx prisma:*)",
       "Bash(openssl rand:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git -C /Users/s4r7h4k/Desktop/vibes/awst log --oneline)",
+      "Bash(grep -E \"\\\\.\\(json|ts|js|mjs|md\\)$\")",
+      "Bash(npm run:*)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(gh auth:*)"
     ]
   }
 }

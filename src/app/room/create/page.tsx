@@ -34,24 +34,26 @@ export default function CreateRoomPage() {
   }
 
   return (
-    <main className="min-h-screen bg-amber-50 dark:bg-zinc-900">
-      <nav className="flex items-center justify-between px-8 py-4 bg-white dark:bg-zinc-900 border-b border-amber-100 dark:border-zinc-800 shadow-sm">
-        <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl text-amber-600">
-          <Gift className="w-6 h-6" />
-          GiftPool
+    <main className="min-h-screen doodle-bg">
+      <nav className="flex items-center justify-between px-8 py-4 bg-blue-900/80 dark:bg-slate-950/80 backdrop-blur-sm border-b border-white/10">
+        <Link href="/dashboard" className="flex items-center gap-2 font-black text-xl">
+          <Gift className="w-6 h-6 text-green-400" />
+          <span className="bg-gradient-to-r from-green-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent">
+            Kontri
+          </span>
         </Link>
         <DarkModeToggle />
       </nav>
 
       <div className="max-w-lg mx-auto px-6 py-10">
-        <Link href="/dashboard" className="flex items-center gap-1 text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 mb-6">
+        <Link href="/dashboard" className="flex items-center gap-1 text-sm text-blue-200 dark:text-slate-400 hover:text-white mb-6 transition">
           <ArrowLeft className="w-4 h-4" />
           Back to dashboard
         </Link>
-        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-50 mb-1">Start a gift mission</h1>
-        <p className="text-gray-400 dark:text-gray-500 text-sm mb-8">Fill in the details and share the link with your group.</p>
+        <h1 className="text-3xl font-extrabold text-white mb-1">Start a gift mission</h1>
+        <p className="text-blue-200 dark:text-slate-400 text-sm mb-8">Fill in the details and share the link with your group.</p>
 
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 flex flex-col gap-4 border border-gray-100 dark:border-zinc-700">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col gap-4 border border-white/10">
           <div>
             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Gift title</label>
             <input
@@ -60,7 +62,7 @@ export default function CreateRoomPage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
             />
           </div>
           <div>
@@ -70,7 +72,7 @@ export default function CreateRoomPage() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300 resize-none"
+              className="w-full border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 resize-none text-gray-800"
             />
           </div>
           <div>
@@ -82,7 +84,7 @@ export default function CreateRoomPage() {
               onChange={(e) => setTargetAmount(e.target.value)}
               required
               min={1}
-              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
             />
           </div>
           <div>
@@ -92,13 +94,13 @@ export default function CreateRoomPage() {
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
               required
-              className="w-full border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="bg-amber-500 text-white rounded-xl py-3 font-bold hover:bg-amber-600 transition disabled:opacity-60 mt-2"
+            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-400 transition disabled:opacity-60 mt-2 shadow-lg shadow-green-500/30"
           >
             {loading ? "Creating..." : "Create room"}
           </button>

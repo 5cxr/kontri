@@ -10,7 +10,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "GiftPool — Group gifting made easy",
+  title: "Kontri — Group gifting made easy",
   description: "Create a room, share the link, and watch the contributions roll in.",
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geist.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
+      <body className="min-h-full flex flex-col font-sans">
         <ThemeProvider>
           {children}
           <Toaster position="top-center" toastOptions={{ duration: 3000 }} />

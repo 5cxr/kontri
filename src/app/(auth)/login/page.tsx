@@ -27,14 +27,16 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-amber-50 dark:bg-zinc-900 flex items-center justify-center px-4">
+    <main className="min-h-screen doodle-bg flex items-center justify-center px-4">
       <div className="absolute top-4 right-4">
         <DarkModeToggle />
       </div>
-      <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-lg p-8 w-full max-w-sm border border-gray-100 dark:border-zinc-700">
-        <div className="flex items-center gap-2 justify-center mb-6 text-amber-600 font-bold text-xl">
-          <Gift className="w-6 h-6" />
-          GiftPool
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 w-full max-w-sm border border-white/10">
+        <div className="flex items-center gap-2 justify-center mb-6 font-black text-xl">
+          <Gift className="w-6 h-6 text-green-500" />
+          <span className="bg-gradient-to-r from-green-500 via-yellow-400 to-pink-500 bg-clip-text text-transparent">
+            Kontri
+          </span>
         </div>
         <h2 className="text-2xl font-extrabold text-center text-gray-900 dark:text-gray-50 mb-1">Welcome back!</h2>
         <p className="text-center text-gray-400 dark:text-gray-500 text-sm mb-6">Log in to your account</p>
@@ -45,7 +47,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+            className="border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
           />
           <input
             type="password"
@@ -53,19 +55,19 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="border border-gray-200 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-300"
+            className="border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
           />
           <button
             type="submit"
             disabled={loading}
-            className="bg-amber-500 text-white rounded-xl py-3 font-bold hover:bg-amber-600 transition disabled:opacity-60"
+            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-400 transition disabled:opacity-60 shadow-lg shadow-green-500/30"
           >
             {loading ? "Logging in..." : "Log in"}
           </button>
         </form>
         <p className="text-center text-sm text-gray-400 dark:text-gray-500 mt-4">
           New here?{" "}
-          <Link href="/register" className="text-amber-600 font-semibold hover:underline">
+          <Link href="/register" className="text-green-600 dark:text-green-400 font-semibold hover:underline">
             Create account
           </Link>
         </p>
