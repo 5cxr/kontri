@@ -14,7 +14,7 @@ export default function CreateRoomPage() {
   const [deadline, setDeadline] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
     const res = await fetch("/api/rooms", {

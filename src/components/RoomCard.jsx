@@ -1,34 +1,19 @@
 import Link from "next/link";
 import { Clock, Crown } from "lucide-react";
 
-interface Room {
-  id: string;
-  title: string;
-  targetAmount: number;
-  collectedAmount: number;
-  deadline: Date;
-  status: string;
-  host: { id: string; name: string };
-}
-
-interface RoomCardProps {
-  room: Room;
-  currentUserId: string;
-}
-
-export default function RoomCard({ room, currentUserId }: RoomCardProps) {
+export default function RoomCard({ room, currentUserId }) {
   const progress = Math.min((room.collectedAmount / room.targetAmount) * 100, 100);
   const isHost = room.host.id === currentUserId;
   const daysLeft = Math.ceil((new Date(room.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 
-  const statusStyles: Record<string, string> = {
+  const statusStyles = {
     open: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
     active: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
     completed: "bg-gray-100 text-gray-600 dark:bg-gray-700/40 dark:text-gray-400",
     expired: "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400",
   };
 
-  const statusLabel: Record<string, string> = {
+  const statusLabel = {
     open: "Open",
     active: "Active",
     completed: "Done!",

@@ -4,13 +4,7 @@ import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 import toast from "react-hot-toast";
 
-interface LockRoomButtonProps {
-  roomId: string;
-  memberCount: number;
-  splitAmount: number;
-}
-
-export default function LockRoomButton({ roomId, memberCount, splitAmount }: LockRoomButtonProps) {
+export default function LockRoomButton({ roomId, memberCount, splitAmount }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

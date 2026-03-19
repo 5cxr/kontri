@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Plus, Gift, LogOut } from "lucide-react";
 import RoomCard from "@/components/RoomCard";
+import DeleteRoomButton from "@/components/DeleteRoomButton";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { signOut } from "@/lib/auth";
 
@@ -73,7 +74,14 @@ export default async function DashboardPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {rooms.map((room) => (
-              <RoomCard key={room.id} room={room} currentUserId={session.user.id} />
+              <div key={room.id} className="relative group">
+                <RoomCard room={room} currentUserId={session.user.id} />
+                {room.hostId === session.user.id && room.status !== "completed" && room.status !== "expired" && (
+                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <DeleteRoomButton roomId={room.id} />
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}

@@ -11,7 +11,7 @@ import DarkModeToggle from "@/components/DarkModeToggle";
 import JoinRoomButton from "@/components/JoinRoomButton";
 import LockRoomButton from "@/components/LockRoomButton";
 
-export default async function RoomPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function RoomPage({ params }) {
   const { id } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect("/login");

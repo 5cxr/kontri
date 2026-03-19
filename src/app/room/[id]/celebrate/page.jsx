@@ -7,20 +7,10 @@ import Link from "next/link";
 import { Gift, Star } from "lucide-react";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
-interface Room {
-  id: string;
-  title: string;
-  description: string | null;
-  targetAmount: number;
-  collectedAmount: number;
-  host: { name: string };
-  contributions: { id: string; user: { name: string }; amount: number; status: string }[];
-}
-
 export default function CelebratePage() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const router = useRouter();
-  const { data: room, loading } = useFetch<Room>(`/api/rooms/${id}`);
+  const { data: room, loading } = useFetch(`/api/rooms/${id}`);
 
   useEffect(() => {
     const timer = setTimeout(() => {

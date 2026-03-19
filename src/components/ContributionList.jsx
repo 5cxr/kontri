@@ -4,23 +4,6 @@ import { useRouter } from "next/navigation";
 import { CheckCircle, Clock, IndianRupee } from "lucide-react";
 import toast from "react-hot-toast";
 
-interface Contribution {
-  id: string;
-  amount: number;
-  status: string;
-  note: string | null;
-  user: { id: string; name: string };
-}
-
-interface ContributionListProps {
-  contributions: Contribution[];
-  roomId: string;
-  isHost: boolean;
-  currentUserId: string;
-  splitAmount: number | null;
-  isMember: boolean;
-}
-
 export default function ContributionList({
   contributions,
   roomId,
@@ -28,10 +11,10 @@ export default function ContributionList({
   currentUserId,
   splitAmount,
   isMember,
-}: ContributionListProps) {
+}) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [confirming, setConfirming] = useState<string | null>(null);
+  const [confirming, setConfirming] = useState(null);
 
   const hasContributed = contributions.some((c) => c.user.id === currentUserId);
 
@@ -52,7 +35,7 @@ export default function ContributionList({
     }
   }
 
-  async function confirmContribution(id: string) {
+  async function confirmContribution(id) {
     setConfirming(id);
     const res = await fetch(`/api/contributions/${id}/confirm`, { method: "PATCH" });
     setConfirming(null);

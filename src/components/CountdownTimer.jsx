@@ -2,11 +2,7 @@
 import { useEffect, useState } from "react";
 import { Clock } from "lucide-react";
 
-interface CountdownTimerProps {
-  deadline: string;
-}
-
-function getStatus(deadline: string) {
+function getStatus(deadline) {
   const now = new Date();
   const end = new Date(deadline);
   const diffMs = end.getTime() - now.getTime();
@@ -18,7 +14,7 @@ function getStatus(deadline: string) {
   return { label: `${diffDays} days left`, color: "text-green-600 dark:text-green-400", urgent: false };
 }
 
-export default function CountdownTimer({ deadline }: CountdownTimerProps) {
+export default function CountdownTimer({ deadline }) {
   const [status, setStatus] = useState(getStatus(deadline));
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export default function JoinRoomButton({ roomId }: { roomId: string }) {
+export default function JoinRoomButton({ roomId }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

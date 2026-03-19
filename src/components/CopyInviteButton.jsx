@@ -1,7 +1,7 @@
 "use client";
 import toast from "react-hot-toast";
 
-export default function CopyInviteButton({ url }: { url: string }) {
+export default function CopyInviteButton({ url }) {
   return (
     <button
       onClick={() => {

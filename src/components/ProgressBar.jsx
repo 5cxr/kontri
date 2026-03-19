@@ -1,15 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 
-interface ProgressBarProps {
-  collected: number;
-  target: number;
-  progress: number;
-}
-
 const milestones = [25, 50, 75, 100];
 
-export default function ProgressBar({ collected, target, progress }: ProgressBarProps) {
+export default function ProgressBar({ collected, target, progress }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">

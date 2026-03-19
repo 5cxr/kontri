@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(_req, { params }) {
   const { id } = await params;
   const contributions = await prisma.contribution.findMany({
     where: { roomId: id },
@@ -12,7 +12,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   return NextResponse.json(contributions);
 }
 
-export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function POST(req, { params }) {
   const { id } = await params;
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   }
 
   // Always use the locked split amount, ignore any amount sent by client
-  const amount = room.splitAmount!;
+  const amount = room.splitAmount;
 
   const existing = await prisma.contribution.findFirst({
     where: { roomId: id, userId: session.user.id },
