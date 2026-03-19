@@ -68,7 +68,7 @@ export default function ContributionList({
     <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 flex flex-col gap-4 border border-gray-200 dark:border-white/10">
       <h2 className="font-bold text-gray-900 dark:text-gray-100 text-lg">Payments</h2>
 
-      {/* Mark as paid button for members who haven't paid yet */}
+      {/* Mark as paid button — only for non-host members who haven't paid yet (host is auto-confirmed at lock) */}
       {isMember && !hasContributed && !isHost && splitAmount && (
         <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800 flex items-center justify-between gap-4">
           <div>
