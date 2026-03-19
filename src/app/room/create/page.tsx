@@ -35,10 +35,10 @@ export default function CreateRoomPage() {
 
   return (
     <main className="min-h-screen doodle-bg">
-      <nav className="flex items-center justify-between px-8 py-4 bg-blue-900/80 dark:bg-slate-950/80 backdrop-blur-sm border-b border-white/10">
+      <nav className="flex items-center justify-between px-8 py-4 bg-white/90 dark:bg-slate-950/80 backdrop-blur-sm border-b border-gray-200/80 dark:border-white/10">
         <Link href="/dashboard" className="flex items-center gap-2 font-black text-xl">
-          <Gift className="w-6 h-6 text-green-400" />
-          <span className="bg-gradient-to-r from-green-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent">
+          <Gift className="w-6 h-6 text-green-500 dark:text-green-400" />
+          <span className="bg-gradient-to-r from-green-500 via-yellow-400 to-pink-500 dark:from-green-400 dark:via-yellow-300 dark:to-pink-400 bg-clip-text text-transparent">
             Kontri
           </span>
         </Link>
@@ -46,14 +46,14 @@ export default function CreateRoomPage() {
       </nav>
 
       <div className="max-w-lg mx-auto px-6 py-10">
-        <Link href="/dashboard" className="flex items-center gap-1 text-sm text-blue-200 dark:text-slate-400 hover:text-white mb-6 transition">
+        <Link href="/dashboard" className="flex items-center gap-1 text-sm text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-white mb-6 transition">
           <ArrowLeft className="w-4 h-4" />
           Back to dashboard
         </Link>
-        <h1 className="text-3xl font-extrabold text-white mb-1">Start a gift mission</h1>
-        <p className="text-blue-200 dark:text-slate-400 text-sm mb-8">Fill in the details and share the link with your group.</p>
+        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-1">Start a gift mission</h1>
+        <p className="text-gray-500 dark:text-slate-400 text-sm mb-8">Fill in the details and share the link with your group.</p>
 
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col gap-4 border border-white/10">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 flex flex-col gap-4 border border-gray-200 dark:border-white/10">
           <div>
             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Gift title</label>
             <input
@@ -100,7 +100,7 @@ export default function CreateRoomPage() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-400 transition disabled:opacity-60 mt-2 shadow-lg shadow-green-500/30"
+            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-600 transition disabled:opacity-60 mt-2"
           >
             {loading ? "Creating..." : "Create room"}
           </button>

@@ -36,10 +36,10 @@ export default function RegisterPage() {
       <div className="absolute top-4 right-4">
         <DarkModeToggle />
       </div>
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 w-full max-w-sm border border-white/10">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 w-full max-w-sm border border-gray-200 dark:border-white/10">
         <div className="flex items-center gap-2 justify-center mb-6 font-black text-xl">
-          <Gift className="w-6 h-6 text-green-500" />
-          <span className="bg-gradient-to-r from-green-500 via-yellow-400 to-pink-500 bg-clip-text text-transparent">
+          <Gift className="w-6 h-6 text-green-500 dark:text-green-400" />
+          <span className="bg-gradient-to-r from-green-500 via-yellow-400 to-pink-500 dark:from-green-400 dark:via-yellow-300 dark:to-pink-400 bg-clip-text text-transparent">
             Kontri
           </span>
         </div>
@@ -74,7 +74,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-400 transition disabled:opacity-60 shadow-lg shadow-green-500/30"
+            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-600 transition disabled:opacity-60"
           >
             {loading ? "Creating account..." : "Create account"}
           </button>

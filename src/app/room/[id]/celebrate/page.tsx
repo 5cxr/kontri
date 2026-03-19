@@ -37,7 +37,7 @@ export default function CelebratePage() {
   if (loading) {
     return (
       <main className="min-h-screen doodle-bg flex items-center justify-center">
-        <p className="text-white font-bold text-xl animate-pulse">Loading celebration...</p>
+        <p className="text-gray-700 dark:text-white font-bold text-xl animate-pulse">Loading celebration...</p>
       </main>
     );
   }
@@ -57,20 +57,19 @@ export default function CelebratePage() {
 
       {/* Header */}
       <Link href="/dashboard" className="flex items-center gap-2 font-black text-xl mb-10">
-        <Gift className="w-6 h-6 text-green-400" />
-        <span className="bg-gradient-to-r from-green-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent">
+        <Gift className="w-6 h-6 text-green-500 dark:text-green-400" />
+        <span className="bg-gradient-to-r from-green-500 via-yellow-400 to-pink-500 dark:from-green-400 dark:via-yellow-300 dark:to-pink-400 bg-clip-text text-transparent">
           Kontri
         </span>
       </Link>
 
       {/* Celebration card */}
-      <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-10 max-w-md w-full text-center flex flex-col items-center gap-4 border border-white/10">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-10 max-w-md w-full text-center flex flex-col items-center gap-4 border border-gray-200 dark:border-white/10">
         <div className="text-6xl">🎉</div>
         <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-50">Goal reached!</h1>
         <p className="text-green-600 dark:text-green-400 font-semibold text-lg">{room.title}</p>
         {room.description && <p className="text-gray-400 dark:text-gray-500 text-sm">{room.description}</p>}
 
-        {/* Full progress bar */}
         <div className="w-full bg-green-100 dark:bg-green-900/30 rounded-full h-5 mt-2">
           <div className="bg-green-500 h-5 rounded-full w-full" />
         </div>
@@ -78,10 +77,9 @@ export default function CelebratePage() {
           ₹{room.collectedAmount.toLocaleString()} raised of ₹{room.targetAmount.toLocaleString()}
         </p>
 
-        {/* Contributors */}
         <div className="w-full text-left mt-2">
           <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1">
-            <Star className="w-4 h-4 text-yellow-400" />
+            <Star className="w-4 h-4 text-yellow-500" />
             Contributors
           </p>
           {confirmed.length === 0 ? (
@@ -98,7 +96,7 @@ export default function CelebratePage() {
           )}
         </div>
 
-        <Link href="/dashboard" className="mt-4 px-6 py-3 bg-green-500 text-white rounded-full font-bold hover:bg-green-400 transition shadow-lg shadow-green-500/30">
+        <Link href="/dashboard" className="mt-4 px-6 py-3 bg-green-500 text-white rounded-full font-bold hover:bg-green-600 transition">
           Back to dashboard
         </Link>
       </div>

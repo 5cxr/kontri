@@ -21,24 +21,32 @@ export default function RoomCard({ room, currentUserId }: RoomCardProps) {
   const isHost = room.host.id === currentUserId;
   const daysLeft = Math.ceil((new Date(room.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 
-  const statusColor = room.status === "completed"
-    ? "bg-green-500/15 text-green-400 border border-green-500/30"
-    : room.status === "expired"
-    ? "bg-red-500/15 text-red-400 border border-red-500/30"
-    : "bg-blue-500/15 text-blue-300 border border-blue-400/30";
+  const statusStyles: Record<string, string> = {
+    open: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    active: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+    completed: "bg-gray-100 text-gray-600 dark:bg-gray-700/40 dark:text-gray-400",
+    expired: "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400",
+  };
+
+  const statusLabel: Record<string, string> = {
+    open: "Open",
+    active: "Active",
+    completed: "Done!",
+    expired: "Expired",
+  };
 
   return (
-    <Link href={`/room/${room.id}`} className="block bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all p-5 border border-white/10">
+    <Link href={`/room/${room.id}`} className="block bg-white dark:bg-slate-800 rounded-2xl shadow hover:shadow-md hover:-translate-y-0.5 transition-all p-5 border border-gray-100 dark:border-white/10">
       <div className="flex items-start justify-between gap-2 mb-3">
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            {isHost && <Crown className="w-4 h-4 text-yellow-400" />}
+            {isHost && <Crown className="w-4 h-4 text-yellow-500" />}
             <h3 className="font-bold text-gray-900 dark:text-gray-100 truncate">{room.title}</h3>
           </div>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{isHost ? "You're hosting" : `by ${room.host.name}`}</p>
         </div>
-        <span className={`text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap ${statusColor}`}>
-          {room.status === "completed" ? "Done!" : room.status === "expired" ? "Expired" : "Active"}
+        <span className={`text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap ${statusStyles[room.status] ?? statusStyles.active}`}>
+          {statusLabel[room.status] ?? room.status}
         </span>
       </div>
 

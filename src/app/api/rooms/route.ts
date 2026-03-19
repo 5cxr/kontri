@@ -11,7 +11,7 @@ export async function GET() {
     where: {
       OR: [
         { hostId: session.user.id },
-        { contributions: { some: { userId: session.user.id } } },
+        { members: { some: { userId: session.user.id } } },
       ],
     },
     include: { host: { select: { id: true, name: true } } },
@@ -31,15 +31,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  const room = await prisma.room.create({
-    data: {
-      title,
-      description,
-      targetAmount: parseFloat(targetAmount),
-      deadline: new Date(deadline),
-      hostId: session.user.id,
-      inviteCode: nanoid(8),
-    },
+  const [room] = await prisma.$transaction(async (tx) => {
+    const newRoom = await tx.room.create({
+      data: {
+        title,
+        description,
+        targetAmount: parseFloat(targetAmount),
+        deadline: new Date(deadline),
+        hostId: session.user.id,
+        inviteCode: nanoid(8),
+        status: "open",
+      },
+    });
+    // Add host as first member
+    await tx.roomMember.create({
+      data: { roomId: newRoom.id, userId: session.user.id },
+    });
+    return [newRoom];
   });
 
   return NextResponse.json(room, { status: 201 });

@@ -16,6 +16,7 @@ model User {
   createdAt     DateTime       @default(now())
   hostedRooms   Room[]         @relation("HostRooms")
   contributions Contribution[]
+  memberships   RoomMember[]
 }
 
 model Room {
@@ -24,13 +25,26 @@ model Room {
   description     String?
   targetAmount    Float
   collectedAmount Float          @default(0)
+  splitAmount     Float?
   deadline        DateTime
-  status          String         @default("active")
+  status          String         @default("open")
   inviteCode      String         @unique
   hostId          String
   host            User           @relation("HostRooms", fields: [hostId], references: [id])
   contributions   Contribution[]
+  members         RoomMember[]
   createdAt       DateTime       @default(now())
+}
+
+model RoomMember {
+  id       String   @id @default(cuid())
+  roomId   String
+  userId   String
+  joinedAt DateTime @default(now())
+  room     Room     @relation(fields: [roomId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([roomId, userId])
 }
 
 model Contribution {
