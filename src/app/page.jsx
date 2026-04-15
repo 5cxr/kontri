@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Gift, Users, TrendingUp } from "lucide-react";
-import DarkModeToggle from "@/components/DarkModeToggle";
+import dynamic from "next/dynamic";
+
+const DarkModeToggle = dynamic(() => import("@/components/DarkModeToggle"), { ssr: false });
 
 export default function Home() {
   return (

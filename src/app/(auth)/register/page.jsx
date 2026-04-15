@@ -13,8 +13,37 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   async function handleSubmit(e) {
     e.preventDefault();
+    
+    let isValid = true;
+    setNameError("");
+    setEmailError("");
+    setPasswordError("");
+
+    if (!name.trim()) {
+      setNameError("Name is required");
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
+      isValid = false;
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]|\\:;"'<>,.?/-]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      setPasswordError("Password needs 8+ characters, uppercase, lowercase, number, and special char.");
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
     setLoading(true);
     const res = await fetch("/api/register", {
       method: "POST",
@@ -46,35 +75,43 @@ export default function RegisterPage() {
         <h2 className="text-2xl font-extrabold text-center text-gray-900 dark:text-gray-50 mb-1">Join the party!</h2>
         <p className="text-center text-gray-400 dark:text-gray-500 text-sm mb-6">Create your Kontri account</p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-            className="border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
-          />
+          <div className="flex flex-col gap-1 w-full">
+            <input
+              type="text"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => { setName(e.target.value); setNameError(""); }}
+              required
+              className={`border ${nameError ? 'border-red-500 focus:ring-red-500 dark:border-red-500' : 'border-gray-200 dark:border-slate-600 focus:ring-green-400'} dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 text-gray-800 transition`}
+            />
+            {nameError && <span className="text-red-500 text-xs font-semibold ml-2">{nameError}</span>}
+          </div>
+          <div className="flex flex-col gap-1 w-full">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setEmailError(""); }}
+              required
+              className={`border ${emailError ? 'border-red-500 focus:ring-red-500 dark:border-red-500' : 'border-gray-200 dark:border-slate-600 focus:ring-green-400'} dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 text-gray-800 transition`}
+            />
+            {emailError && <span className="text-red-500 text-xs font-semibold ml-2">{emailError}</span>}
+          </div>
+          <div className="flex flex-col gap-1 w-full">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setPasswordError(""); }}
+              required
+              className={`border ${passwordError ? 'border-red-500 focus:ring-red-500 dark:border-red-500' : 'border-gray-200 dark:border-slate-600 focus:ring-green-400'} dark:bg-slate-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 text-gray-800 transition`}
+            />
+            {passwordError && <span className="text-red-500 text-xs font-semibold ml-2">{passwordError}</span>}
+          </div>
           <button
             type="submit"
             disabled={loading}
-            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-600 transition disabled:opacity-60"
+            className="bg-green-500 text-white rounded-xl py-3 font-bold hover:bg-green-600 transition disabled:opacity-60 mt-2"
           >
             {loading ? "Creating account..." : "Create account"}
           </button>
